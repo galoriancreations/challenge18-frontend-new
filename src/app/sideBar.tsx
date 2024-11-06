@@ -7,6 +7,7 @@ import { BiSolidSchool } from "react-icons/bi";
 import { HiOutlineLightBulb } from "react-icons/hi";
 import { GoGraph } from "react-icons/go";
 import { CiGlobe } from "react-icons/ci";
+import { IoInformationCircleOutline } from "react-icons/io5";
 
 const Sidebar = () => {
   const [activeLink, setActiveLink] = useState<string | null>(null);
@@ -110,7 +111,9 @@ const Sidebar = () => {
               activeLink === "about" ? "hover:bg-accent text-secondary" : "hover:bg-accent hover:text-white"
             }`}
           >
-            <span>ℹ️</span>
+            <span>
+              <IoInformationCircleOutline size={25} />
+            </span>
             <span>About</span>
           </a>
         </li>
