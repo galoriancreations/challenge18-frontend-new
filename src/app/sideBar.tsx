@@ -8,6 +8,7 @@ import { HiOutlineLightBulb } from "react-icons/hi";
 import { GoGraph } from "react-icons/go";
 import { CiGlobe } from "react-icons/ci";
 import { IoInformationCircleOutline } from "react-icons/io5";
+import Link from "next/link";
 
 const Sidebar = () => {
   const [activeLink, setActiveLink] = useState<string | null>(null);
@@ -15,108 +16,32 @@ const Sidebar = () => {
   const handleLinkClick = (link: string) => {
     setActiveLink(link);
   };
-
+  const links = [
+    { label: "Educators", href: "/educators", icon: <LiaChalkboardTeacherSolid /> },
+    { label: "Students", href: "/students", icon: <TbSchool /> },
+    { label: "Institutions", href: "/institutions", icon: <BiSolidSchool /> },
+    { label: "Ed-Tech Startups", href: "/edtech", icon: <HiOutlineLightBulb /> },
+    { label: "Investors", href: "/investors", icon: <GoGraph /> },
+    { label: "Government", href: "/government", icon: <CiGlobe /> },
+    { label: "About", href: "/about", icon: <IoInformationCircleOutline /> },
+  ];
   return (
     <aside className="w-52 h-screen bg-primary text-textPrimary fixed">
       <ul className="space-y-4">
-        <li>
-          <a
-            href="#"
-            onClick={() => handleLinkClick("educators")}
-            className={`flex items-center w-full gap-4 mt-6 px-6 py-2 ${
-              activeLink === "educators" ? "hover:bg-accent text-secondary" : "hover:bg-accent hover:text-white"
-            }`}
-          >
-            <span>
-              <LiaChalkboardTeacherSolid size={25} />
-            </span>
-            <span>Educators</span>
-          </a>
-        </li>
-        <li>
-          <a
-            href="#"
-            onClick={() => handleLinkClick("students")}
-            className={`flex items-center gap-4 px-6 py-2 ${
-              activeLink === "students" ? "hover:bg-accent text-secondary" : "hover:bg-accent hover:text-white"
-            }`}
-          >
-            <span>
-              <TbSchool size={25} />
-            </span>
-            <span>Students</span>
-          </a>
-        </li>
-        <li>
-          <a
-            href="#"
-            onClick={() => handleLinkClick("institutions")}
-            className={`flex items-center gap-4 px-6 py-2 ${
-              activeLink === "institutions" ? "hover:bg-accent text-secondary" : "hover:bg-accent hover:text-white"
-            }`}
-          >
-            <span>
-              <BiSolidSchool size={25} />
-            </span>
-            <span>Institutions</span>
-          </a>
-        </li>
-        <li>
-          <a
-            href="#"
-            onClick={() => handleLinkClick("edtech")}
-            className={`flex items-center gap-4 px-6 py-2 ${
-              activeLink === "edtech" ? "hover:bg-accent text-secondary" : "hover:bg-accent hover:text-white"
-            }`}
-          >
-            <span>
-              <HiOutlineLightBulb size={25} />
-            </span>
-            <span>Ed-Tech Startups</span>
-          </a>
-        </li>
-        <li>
-          <a
-            href="#"
-            onClick={() => handleLinkClick("investors")}
-            className={`flex items-center gap-4 px-6 py-2 ${
-              activeLink === "investors" ? "hover:bg-accent text-secondary" : "hover:bg-accent hover:text-white"
-            }`}
-          >
-            <span>
-              <GoGraph size={25} />
-            </span>
-            <span>Investors</span>
-          </a>
-        </li>
-        <li>
-          <a
-            href="#"
-            onClick={() => handleLinkClick("government")}
-            className={`flex items-center gap-4 px-6 py-2 ${
-              activeLink === "government" ? "hover:bg-accent text-secondary" : "hover:bg-accent hover:text-white"
-            }`}
-          >
-            <span>
-              <CiGlobe size={25} />
-            </span>
-            <span>Government and NGO</span>
-          </a>
-        </li>
-        <li>
-          <a
-            href="#"
-            onClick={() => handleLinkClick("about")}
-            className={`flex items-center gap-4 px-6 py-2 ${
-              activeLink === "about" ? "hover:bg-accent text-secondary" : "hover:bg-accent hover:text-white"
-            }`}
-          >
-            <span>
-              <IoInformationCircleOutline size={25} />
-            </span>
-            <span>About</span>
-          </a>
-        </li>
+        {links.map((link) => (
+          <li key={link.href}>
+            <a
+              href="#" //{link.href}
+              onClick={() => handleLinkClick(link.label)}
+              className={`flex items-center w-full gap-4 mt-6 px-6 py-2 ${
+                activeLink === link.label ? "hover:bg-accent text-secondary" : "hover:bg-accent hover:text-white"
+              }`}
+            >
+              <span>{link.icon}</span>
+              <span>{link.label}</span>
+            </a>
+          </li>
+        ))}
       </ul>
     </aside>
   );
