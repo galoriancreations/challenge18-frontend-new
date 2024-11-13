@@ -9,13 +9,12 @@ import { GoGraph } from "react-icons/go";
 import { CiGlobe } from "react-icons/ci";
 import { IoInformationCircleOutline } from "react-icons/io5";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import classnames from "classnames";
 
 const Sidebar = () => {
-  const [activeLink, setActiveLink] = useState<string | null>(null);
+  const currentPath = usePathname();
 
-  const handleLinkClick = (link: string) => {
-    setActiveLink(link);
-  };
   const links = [
     { label: "Educators", href: "/educators", icon: <LiaChalkboardTeacherSolid /> },
     { label: "Students", href: "/students", icon: <TbSchool /> },
@@ -29,22 +28,25 @@ const Sidebar = () => {
     <aside className="w-52 h-screen bg-primary text-textPrimary fixed">
       <ul className="space-y-4">
         {links.map((link) => (
-          <li key={link.href}>
-            <a
-              href="#" //{link.href}
-              onClick={() => handleLinkClick(link.label)}
-              className={`flex items-center w-full gap-4 mt-6 px-6 py-2 ${
-                activeLink === link.label ? "hover:bg-accent text-secondary" : "hover:bg-accent hover:text-white"
-              }`}
-            >
-              <span>{link.icon}</span>
-              <span>{link.label}</span>
-            </a>
-          </li>
+          <Link
+            key={link.href}
+            href={link.href}
+            className={classnames("flex items-center gap-4 px-6 py-2 hover:bg-accent ", {
+              " text-secondary transition-colors": link.href === currentPath,
+              "hover:text-white": link.href !== currentPath,
+            })}
+          >
+            <span>{link.icon}</span>
+            <span>{link.label}</span>
+          </Link>
         ))}
       </ul>
     </aside>
   );
 };
+
+// `flex items-center w-full gap-4 mt-6 px-6 py-2 hover:bg-accent ${
+//               link.href === currentPath ? " text-secondary" : " hover:text-white"
+//             }`
 
 export default Sidebar;
