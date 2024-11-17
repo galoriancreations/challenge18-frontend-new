@@ -16,9 +16,9 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-primary text-white py-8 ml-52 mt-auto">
+    <footer className="bg-gray-100 text-gray-800 py-8 ml-52 mt-auto border-t border-gray-300">
       <div className="container mx-auto px-6 text-center">
-        <p className="mb-4">&copy; 2023 Ting Global Academy. All Rights Reserved.</p>
+        <p className="mb-4">&copy; 2024 Ting Global Academy. All Rights Reserved.</p>
 
         <div className="space-x-4">
           {footerLinks.map(({ label, href }) => (
