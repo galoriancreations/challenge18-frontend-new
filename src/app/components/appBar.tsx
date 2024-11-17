@@ -5,9 +5,15 @@ import { BiSearch } from "react-icons/bi";
 
 const AppBar = () => {
   return (
-    <header className="bg-primary text-textPrimary p-4 shadow-lg flex justify-between items-center h-16">
+    <header className="bg-primary text-textPrimary p-4 shadow-lg flex justify-between items-center h-16 fixed top-0 left-0 w-full z-50">
       <Link href="/" className="flex items-center h-full">
-        <Image src="/logo.png" alt="Company Logo" className="object-contain" width={70} height={70} />
+        <Image
+          src="/images/ting-global-logo.png"
+          alt="Ting Global Company Logo"
+          className="object-contain"
+          width={70}
+          height={70}
+        />
       </Link>
 
       <div className="relative flex-1 flex justify-center max-w-md">

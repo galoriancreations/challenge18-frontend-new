@@ -25,14 +25,14 @@ const Sidebar = () => {
     { label: "About", href: "/about", icon: <IoInformationCircleOutline /> },
   ];
   return (
-    <aside className="w-52 h-screen bg-primary text-textPrimary fixed">
+    <aside className="w-52 h-[calc(100vh-4rem)] bg-primary text-textPrimary fixed top-16">
       <ul className="space-y-4">
         {links.map((link) => (
           <Link
             key={link.href}
             href={link.href}
             className={classnames("flex items-center gap-4 px-6 py-2 hover:bg-accent ", {
-              " text-secondary transition-colors": link.href === currentPath,
+              "text-secondary transition-colors": link.href === currentPath,
               "hover:text-white": link.href !== currentPath,
             })}
           >
