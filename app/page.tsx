@@ -1,18 +1,20 @@
-import { FC } from 'react';
-import FilterMenu from './filters/filters';
-import StartupList from './lists/list';
+import { FilterProvider } from './context/filterContext';
+import FilterMenu from './components/filters/filters';
+import StartupList from './components/lists/list';
 
-const HomePage: FC = () => {
+const HomePage = () => {
   return (
-    <div className="flex min-h-screen">
-      <div className="w-1/4 p-4 bg-gray-100 border-r border-gray-300">
-        <FilterMenu />
+    <FilterProvider>
+      <div className="flex min-h-screen">
+        <div className="w-1/4 p-4 bg-gray-100 border-r border-gray-300">
+          <FilterMenu />
+        </div>
+        <div className="w-3/4 p-8">
+          <StartupList />
+        </div>
       </div>
-      <div className="w-3/4 p-8">
-        <StartupList />
-      </div>
-    </div>
+    </FilterProvider>
   );
-}
+};
 
 export default HomePage;
