@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import "./globals.css";
 import AppBar from "./components/appBar";
 import Sidebar from "./components/sideBar";
@@ -20,10 +19,7 @@ export default function RootLayout({
         <AppBar />
         <div className="flex flex-grow">
           <Sidebar />
-          <main className="flex-grow p-6 ml-52 mt-16 ">
-            {/* Content */}
-            {children}
-          </main>
+          <main className="flex-grow p-6 ml-52 mt-16 ">{children}</main>
         </div>
         <Footer />
       </body>

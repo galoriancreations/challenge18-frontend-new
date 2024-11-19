@@ -1,9 +1,29 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { BiSearch } from "react-icons/bi";
+import SearchBar from "./searchBar";
 
 const AppBar = () => {
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const response = await fetch("/api/search-data");
+  //     const data = await response.json();
+  //     setSearchItems(data);
+  //   }
+  //   fetchData();
+  // }, []);
+
+  const searchItems = [
+    { name: "Home", link: "/" },
+    { name: "About Us", link: "/about" },
+    { name: "educators", link: "/educators" },
+    { name: "students", link: "/students" },
+    { name: "institutions", link: "/institutions" },
+    { name: "ed-tech startups", link: "/edtech" },
+    { name: "investors", link: "/investors" },
+    { name: "government", link: "/government" },
+  ];
+
   return (
     <header className="bg-primary text-textPrimary p-4 shadow-lg flex justify-between items-center h-16 fixed top-0 left-0 w-full z-50">
       <Link href="/" className="flex items-center h-full">
@@ -16,15 +36,8 @@ const AppBar = () => {
         />
       </Link>
 
-      <div className="relative flex-1 flex justify-center max-w-md">
-        <span className="absolute inset-y-0 left-4 flex items-center text-gray-500">
-          <BiSearch size={20} />
-        </span>
-        <input
-          className="py-2 pl-10 pr-4 w-full rounded-full bg-white text-primary shadow-md placeholder-primary placeholder-opacity-70"
-          type="text"
-          placeholder="Search"
-        />
+      <div className="max-w-3xl w-full px-4">
+        <SearchBar items={searchItems} />
       </div>
 
       <nav className="flex items-center gap-8">
