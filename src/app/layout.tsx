@@ -19,7 +19,7 @@ export default function RootLayout({
         <AppBar />
         <div className="flex flex-grow">
           <Sidebar />
-          <main className="flex-grow p-6 ml-52 mt-16 ">{children}</main>
+          <main className="flex-grow  ml-52 mt-16 ">{children}</main>
         </div>
         <Footer />
       </body>

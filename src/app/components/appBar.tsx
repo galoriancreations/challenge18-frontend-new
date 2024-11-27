@@ -25,7 +25,7 @@ const AppBar = () => {
   ];
 
   return (
-    <header className="bg-primary text-textPrimary p-4 shadow-lg flex justify-between items-center h-16 fixed top-0 left-0 w-full z-50">
+    <header className=" bg-gradient-to-r from-primary-navy/90 to-primary-cyan/90 text-neutral-charcol p-4 shadow-lg flex justify-between items-center h-16 fixed top-0 left-0 w-full z-50">
       <Link href="/" className="flex items-center h-full">
         <Image
           src="/images/ting-global-logo.png"

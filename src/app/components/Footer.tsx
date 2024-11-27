@@ -16,7 +16,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gray-100 text-gray-800 py-8 ml-52 mt-auto border-t border-gray-300">
+    <footer className="bg-gray-100 bg-opacity-10 text-gray-800 py-8 ml-52 mt-auto border-t border-gray-300">
       <div className="container mx-auto px-6 text-center">
         <p className="mb-4">&copy; 2024 Ting Global Academy. All Rights Reserved.</p>
 
