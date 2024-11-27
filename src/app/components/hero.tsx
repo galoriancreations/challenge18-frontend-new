@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 const Hero: React.FC = () => {
   return (
-    <section className=" relative min-h-screen flex flex-col items-center justify-center text-center">
+    <section className=" relative w-full min-h-screen flex flex-col items-center justify-center text-center">
       <Image
         src="/images/hero image.webp"
         alt="hero image"

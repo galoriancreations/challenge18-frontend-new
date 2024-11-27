@@ -25,7 +25,7 @@ const Sidebar = () => {
     { label: "About", href: "/about", icon: <IoInformationCircleOutline /> },
   ];
   return (
-    <aside className="w-52 h-[calc(100vh-4rem)] bg-primary text-textPrimary fixed top-16">
+    <aside className="w-52 h-[calc(100vh-4rem)]  bg-primary-navy  text-textPrimary fixed top-16">
       <ul className="space-y-4">
         {links.map((link) => (
           <Link

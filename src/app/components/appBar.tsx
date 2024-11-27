@@ -25,27 +25,29 @@ const AppBar = () => {
   ];
 
   return (
-    <header className=" bg-gradient-to-r from-primary-navy/90 to-primary-cyan/90 text-neutral-charcol p-4 shadow-lg flex justify-between items-center h-16 fixed top-0 left-0 w-full z-50">
-      <Link href="/" className="flex items-center h-full">
-        <Image
-          src="/images/ting-global-logo.png"
-          alt="Ting Global Company Logo"
-          className="object-contain"
-          width={70}
-          height={70}
-        />
-      </Link>
+    <header className="fixed bg-gradient-to-r from-primary-blue via-accent-pink to-accent-purple text-neutral-silver p-4 shadow-lg flex justify-between items-center h-16 top-0 left-0 w-full z-50 backdrop-blur-md bg-opacity-70">
+      <div className="flex justify-between items-center w-full">
+        <Link href="/" className="flex items-center h-full">
+          <Image
+            src="/images/ting-global-logo.png"
+            alt="Ting Global Company Logo"
+            className="object-contain"
+            width={70}
+            height={70}
+          />
+        </Link>
 
-      <div className="max-w-3xl w-full px-4">
-        <SearchBar items={searchItems} />
+        <div className="max-w-3xl w-full px-4">
+          <SearchBar items={searchItems} />
+        </div>
+
+        <nav className="flex items-center gap-8">
+          <a href="#" className="hover:text-secondary font-semibold">
+            Log In
+          </a>
+          <button className="bg-secondary text-primary font-semibold px-4 py-2 rounded">Sign Up</button>
+        </nav>
       </div>
-
-      <nav className="flex items-center gap-8">
-        <a href="#" className="hover:text-secondary font-semibold">
-          Log In
-        </a>
-        <button className="bg-secondary text-primary font-semibold px-4 py-2 rounded">Sign Up</button>
-      </nav>
     </header>
   );
 };
