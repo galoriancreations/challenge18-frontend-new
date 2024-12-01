@@ -1,0 +1,136 @@
+{
+  "platforms": [
+    {
+      "id": "edmodo",
+      "name": "Edmodo",
+      "overview": "Edmodo is a social learning platform designed to connect teachers, students, and parents. It allows for collaboration, sharing of resources, and communication within a safe and structured environment.",
+      "keyFeatures": [
+        "Classroom Management: Teachers can create virtual classrooms, assign homework, and manage student progress",
+        "Resource Sharing: Educators can share lesson plans, resources, and activities",
+        "Communication Tools: Messaging features for teachers to communicate with students and parents",
+        "Integration with Third-Party Apps: Edmodo supports various educational apps and tools"
+      ],
+      "type": "social-learning"
+    },
+    {
+      "id": "coursera",
+      "name": "Coursera",
+      "overview": "Coursera is an online learning platform that partners with universities and organizations worldwide to offer courses, specializations, and degrees.",
+      "keyFeatures": [
+        "Wide Range of Courses: Offers courses across various disciplines",
+        "Professional Certificates: Provides certifications and degrees from top institutions",
+        "Interactive Learning: Includes video lectures, assignments, and peer-reviewed projects",
+        "Collaboration with Universities: Partners with universities like Stanford, Yale, and the University of London"
+      ],
+      "type": "mooc"
+    },
+    {
+      "id": "khan-academy",
+      "name": "Khan Academy",
+      "overview": "Khan Academy is a non-profit educational platform that offers free online courses, lessons, and practice exercises.",
+      "keyFeatures": [
+        "Personalized Learning Dashboard: Students can learn at their own pace",
+        "Interactive Content: Includes videos, exercises, and quizzes",
+        "Teacher Tools: Educators can track student progress and provide guidance",
+        "Partnerships: Collaborates with institutions like NASA and The Museum of Modern Art"
+      ],
+      "type": "free-education"
+    },
+    {
+      "id": "google-education",
+      "name": "Google for Education",
+      "overview": "Google for Education offers a suite of tools and services designed to enhance teaching and learning.",
+      "keyFeatures": [
+        "Google Classroom: A platform for managing coursework and assignments",
+        "G Suite for Education: Includes tools like Google Docs, Sheets, and Drive",
+        "Chromebooks: Affordable devices optimized for educational use",
+        "Professional Development: Training resources for educators"
+      ],
+      "type": "education-suite"
+    },
+    {
+      "id": "classdojo",
+      "name": "ClassDojo",
+      "overview": "ClassDojo is a communication platform that connects teachers, students, and parents, focusing on building classroom communities.",
+      "keyFeatures": [
+        "Classroom Management: Teachers can share classroom moments, assign tasks, and reward students",
+        "Communication Tools: Direct messaging between teachers and parents",
+        "Positive Reinforcement: A points-based system to encourage positive behavior",
+        "Digital Portfolios: Students can showcase their work and progress"
+      ],
+      "type": "classroom-community"
+    },
+    {
+      "id": "blackboard",
+      "name": "Blackboard Learn",
+      "overview": "Blackboard Learn is a learning management system (LMS) used by institutions to create and manage educational content and experiences.",
+      "keyFeatures": [
+        "Course Management: Tools for creating and managing courses",
+        "Collaborative Tools: Features like discussion boards and group projects",
+        "Analytics: Insights into student performance and engagement",
+        "Integration: Supports integration with other educational tools"
+      ],
+      "type": "lms"
+    },
+    {
+      "id": "udemy",
+      "name": "Udemy",
+      "overview": "Udemy is an online learning marketplace that offers a wide range of courses created by instructors worldwide.",
+      "keyFeatures": [
+        "Extensive Course Library: Courses on everything from coding to creative writing",
+        "Self-Paced Learning: Students can learn at their own pace",
+        "Instructor Tools: Tools for course creation and marketing",
+        "Corporate Training: Enterprise solutions for employee training"
+      ],
+      "type": "marketplace"
+    },
+    {
+      "id": "linkedin-learning",
+      "name": "LinkedIn Learning",
+      "overview": "LinkedIn Learning offers online courses in business, technology, and creative skills, integrated with LinkedIn profiles for professional development.",
+      "keyFeatures": [
+        "Professional Development: Courses designed for career skills",
+        "Personalized Recommendations: Based on LinkedIn profile",
+        "Certifications: Completion certificates for LinkedIn profiles",
+        "Corporate Training: Solutions for business workforce"
+      ],
+      "type": "professional-development"
+    },
+    {
+      "id": "microsoft-education",
+      "name": "Microsoft Education",
+      "overview": "Microsoft Education provides tools and resources to enhance teaching and learning experiences in classrooms.",
+      "keyFeatures": [
+        "Microsoft Teams for Education: Platform for virtual classrooms",
+        "OneNote Class Notebooks: Digital notebooks for learning",
+        "Office 365 Education: Free tools for educators and students",
+        "Minecraft: Education Edition: Game-based learning platform"
+      ],
+      "type": "education-suite"
+    },
+    {
+      "id": "openclassrooms",
+      "name": "OpenClassrooms",
+      "overview": "OpenClassrooms is an online education platform that offers degree programs, courses, and mentorship in various fields, especially in technology.",
+      "keyFeatures": [
+        "Project-Based Learning: Focuses on hands-on projects",
+        "Mentorship: One-on-one mentor guidance",
+        "Career Services: Career coaching and job placement",
+        "Accredited Degrees: Recognized degrees with partnerships"
+      ],
+      "type": "degree-programs"
+    },
+    {
+      "id": "ting-global",
+      "name": "Ting Global",
+      "overview": "Ting Global is a dynamic and evolving ecosystem committed to addressing the complex challenges of our time, preparing individuals, businesses, and communities to thrive in an ever-changing world.",
+      "keyFeatures": [
+        "Deep Listening: Responding to educational needs",
+        "Innovative Learning: Diverse learning initiatives",
+        "Community Focus: Preparing organizations and communities",
+        "Adaptive Learning: Evolving paradigms for modern challenges"
+      ],
+      "type": "educational-ecosystem"
+    }
+  ]
+}
