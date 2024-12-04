@@ -42,7 +42,7 @@ const AppBar = () => {
         </div>
 
         <nav className="flex items-center gap-8">
-          <a href="#" className="hover:text-secondary font-semibold">
+          <a href="/log-in" className="hover:text-secondary font-semibold">
             Log In
           </a>
           <button className="bg-secondary text-primary font-semibold px-4 py-2 rounded">Sign Up</button>
