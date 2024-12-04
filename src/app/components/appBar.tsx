@@ -41,11 +41,11 @@ const AppBar = () => {
           <SearchBar items={searchItems} />
         </div>
 
-        <nav className="flex items-center gap-8">
-          <a href="/log-in" className="hover:text-secondary font-semibold">
+        <nav className="flex items-center gap-8 text-neutral-silver ">
+          <a href="/log-in" className="hover:text-neutral-charcoal font-semibold">
             Log In
           </a>
-          <button className="bg-secondary text-primary font-semibold px-4 py-2 rounded">Sign Up</button>
+          <button className="hover:text-neutral-charcoal  font-semibold ">Sign Up</button>
         </nav>
       </div>
     </header>

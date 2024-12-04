@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import EmailIcon from "../icons/email.icon";
 import PasswordIcon from "../icons/password.icon";
@@ -6,17 +7,29 @@ import UserIcon from "../icons/user.icon";
 import InputField from "../components/userInputFields";
 
 interface RegistrationFormInputs {
-  username: string | null;
-  email: string | null;
-  password: string | null;
+  username: string;
+  email: string;
+  password: string;
 }
 
 const LoginPage: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+
   const [formData, setFormData] = React.useState<RegistrationFormInputs>({
-    username: null,
-    email: null,
-    password: null,
+    username: "",
+    email: "",
+    password: "",
   });
+
+  const [formErrors, setFormErrors] = React.useState({ username: "", email: "", password: "" });
+
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+    setFormData({ username: "", email: "", password: "" }); // Reset form data when closing
+    setFormErrors({ username: "", email: "", password: "" });
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -26,9 +39,38 @@ const LoginPage: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validateForm = () => {
+    const errors = { username: "", email: "", password: "" };
+    let isValid = true;
+
+    if (!formData.username.trim()) {
+      errors.username = "Username required.";
+      isValid = false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim()) {
+      errors.email = "Email required.";
+      isValid = false;
+    } else if (!emailRegex.test(formData.email)) {
+      errors.email = "Invalid email format.";
+      isValid = false;
+    }
+
+    if (!formData.password.trim()) {
+      errors.password = "Password required";
+      isValid = false;
+    }
+
+    setFormErrors(errors);
+    return isValid;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form Submitted:", formData);
+    console.log("Form submitted successfully:", formData);
+
+    if (!validateForm()) return;
   };
 
   const inputFields = [
@@ -37,18 +79,21 @@ const LoginPage: React.FC = () => {
     { label: "Password", type: "password", name: "password", icon: PasswordIcon },
   ];
   return (
-    <div className="bg-slate-700 min-h-screen flex items-center justify-center">
+    <div className="bg-slate-500 min-h-screen flex items-center justify-center">
       <form className="bg-white p-6 rounded-md shadow-md space-y-4 w-80" onSubmit={handleSubmit}>
         {inputFields.map(({ label, type, name, icon }) => (
-          <InputField
-            key={name}
-            label={label}
-            type={type}
-            name={name}
-            Icon={icon}
-            value={formData[name as keyof RegistrationFormInputs]}
-            onChange={handleChange}
-          />
+          <div>
+            <InputField
+              key={name}
+              label={label}
+              type={type}
+              name={name}
+              Icon={icon}
+              value={formData[name as keyof RegistrationFormInputs]}
+              onChange={handleChange}
+              error={formErrors[name as keyof RegistrationFormInputs]}
+            />
+          </div>
         ))}
         <button type="submit" className="w-full bg-primary-blue text-white py-2 rounded-md hover:bg-primary-blue/90">
           Login
