@@ -101,7 +101,6 @@ const SignUpPage: React.FC = () => {
         throw new Error("Invalid JSON response from server.");
       }
 
-      // Add a short delay to show the success message before redirecting
       setTimeout(() => router.push("/login"), 2000); // Wait 2 seconds before redirecting
     } catch (error: any) {
       const userFriendlyErrorMessage = error.message.includes("Error:")
