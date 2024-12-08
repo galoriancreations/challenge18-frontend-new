@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import InputField from "../components/userInputFields";
+import axios from "axios";
 
 interface RegistrationFormInputs {
   username: string;
@@ -19,7 +20,9 @@ const SignUpPage: React.FC = () => {
     confirmPassword: "",
   });
 
-  const [formErrors, setFormErrors] = useState<Partial<RegistrationFormInputs>>({});
+  const [formErrors, setFormErrors] = useState<Partial<RegistrationFormInputs>>(
+    {}
+  );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -80,33 +83,37 @@ const SignUpPage: React.FC = () => {
     setErrorMessage(null);
 
     try {
-      const res = await fetch("/api/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      // const res = await fetch("/api/signup", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify(formData),
+      // });
 
-      const contentType = res.headers.get("content-type");
+      // const contentType = res.headers.get("content-type");
 
-      if (!res.ok) {
-        const errorText = await res.text();
-        throw new Error(`Error: ${res.status} - ${errorText}`);
-      }
+      // if (!res.ok) {
+      //   const errorText = await res.text();
+      //   throw new Error(`Error: ${res.status} - ${errorText}`);
+      // }
 
-      let data = null;
-      if (contentType && contentType.includes("application/json")) {
-        data = await res.json();
-        setSuccessMessage(data.message || "Account created successfully!");
-      } else {
-        throw new Error("Invalid JSON response from server.");
-      }
-
+      // let data = null;
+      // if (contentType && contentType.includes("application/json")) {
+      //   data = await res.json();
+      //   setSuccessMessage(data.message || "Account created successfully!");
+      // } else {
+      //   throw new Error("Invalid JSON response from server.");
+      // }
+      const { data } = await axios.post("/api/signup", formData);
+      setSuccessMessage(data.message || "Account created successfully!");
       setTimeout(() => router.push("/login"), 2000); // Wait 2 seconds before redirecting
     } catch (error: any) {
+      console.log("signup error", error);
       const userFriendlyErrorMessage = error.message.includes("Error:")
         ? "An error occurred. Please try again later."
         : error.message;
-      setErrorMessage(userFriendlyErrorMessage || "Something went wrong. Please try again.");
+      setErrorMessage(
+        userFriendlyErrorMessage || "Something went wrong. Please try again."
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -121,7 +128,10 @@ const SignUpPage: React.FC = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-slate-500">
-      <form className="bg-white p-6 rounded-md shadow-md w-96" onSubmit={handleSubmit}>
+      <form
+        className="bg-white p-6 rounded-md shadow-md w-96"
+        onSubmit={handleSubmit}
+      >
         <h1 className="text-center text-2xl font-bold mb-4">Sign Up</h1>
 
         {inputFields.map(({ label, type, name }) => (
@@ -136,8 +146,12 @@ const SignUpPage: React.FC = () => {
           />
         ))}
 
-        {successMessage && <div className="text-green-500 mb-4">{successMessage}</div>}
-        {errorMessage && <div className="text-red-500 mb-4">{errorMessage}</div>}
+        {successMessage && (
+          <div className="text-green-500 mb-4">{successMessage}</div>
+        )}
+        {errorMessage && (
+          <div className="text-red-500 mb-4">{errorMessage}</div>
+        )}
 
         <button
           type="submit"
