@@ -45,7 +45,9 @@ const AppBar = () => {
           <a href="/log-in" className="hover:text-neutral-charcoal font-semibold">
             Log In
           </a>
-          <button className="hover:text-neutral-charcoal  font-semibold ">Sign Up</button>
+          <a href="/sign-up" className="hover:text-neutral-charcoal font-semibold">
+            Sign up
+          </a>
         </nav>
       </div>
     </header>

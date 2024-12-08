@@ -1,9 +1,5 @@
 "use client";
-
 import React from "react";
-import EmailIcon from "../icons/email.icon";
-import PasswordIcon from "../icons/password.icon";
-import UserIcon from "../icons/user.icon";
 import InputField from "../components/userInputFields";
 
 interface RegistrationFormInputs {
@@ -74,21 +70,20 @@ const LoginPage: React.FC = () => {
   };
 
   const inputFields = [
-    { label: "Username", type: "text", name: "username", icon: UserIcon },
-    { label: "Email", type: "email", name: "email", icon: EmailIcon },
-    { label: "Password", type: "password", name: "password", icon: PasswordIcon },
+    { label: "Username", type: "text", name: "username" },
+    { label: "Email", type: "email", name: "email" },
+    { label: "Password", type: "password", name: "password" },
   ];
   return (
     <div className="bg-slate-500 min-h-screen flex items-center justify-center">
       <form className="bg-white p-6 rounded-md shadow-md space-y-4 w-80" onSubmit={handleSubmit}>
-        {inputFields.map(({ label, type, name, icon }) => (
+        {inputFields.map(({ label, type, name }) => (
           <div>
             <InputField
               key={name}
               label={label}
               type={type}
               name={name}
-              Icon={icon}
               value={formData[name as keyof RegistrationFormInputs]}
               onChange={handleChange}
               error={formErrors[name as keyof RegistrationFormInputs]}
