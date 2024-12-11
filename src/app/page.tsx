@@ -8,7 +8,7 @@ const HomePage = () => {
         <Hero />
 
         {DESCRIPTION_TEXT.map((item, index) => (
-          <section key={index} className="mt-10 p-5">
+          <section key={index} className="mt-5 p-5">
             <h2 className="text-3xl font-bold">{item.title}</h2>
             <p className="mt-4">{item.text}</p>
           </section>
