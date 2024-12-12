@@ -40,7 +40,7 @@ const PlatformList = () => {
   };
 
   const filteredPlatforms = platforms.filter(platform => {
-    const nameMatch = platform.name.toLowerCase().includes(filters.nameOrDescription.toLowerCase());
+    const nameMatch = platform.name.toLowerCase().includes(filters.searchTerm.toLowerCase());
     return nameMatch;
   });
 
@@ -58,6 +58,13 @@ const PlatformList = () => {
             <div className="w-12 sm:w-16 h-0.5 bg-blue-600 mx-auto mt-2 sm:mt-3"></div>
           </div>
 
+          {filteredPlatforms.length === 0 && (
+            <div className="w-full text-center py-8">
+              <p className="text-gray-600 text-lg">No courses found</p>
+              <p className="text-gray-400 text-sm mt-2">Try adjusting your search criteria</p>
+            </div>
+          )}
+      
           <div className="space-y-4 sm:space-y-5">
             {filteredPlatforms.map((platform, index) => (
               <div key={index} className="block transform hover:scale-[1.01] transition-all duration-200">
@@ -114,7 +121,6 @@ const PlatformList = () => {
           </div>
         </div>
       </div>
-    );
-};
+    );};
 
 export default PlatformList;

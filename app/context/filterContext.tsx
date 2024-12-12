@@ -1,22 +1,19 @@
 "use client";
 import { createContext, useContext, useState, ReactNode } from 'react';
 
+interface Filters {
+  searchTerm: string;
+}
+
 type FilterContextType = {
-  filters: {
-    nameOrDescription: string;
-    founded: string;
-  };
-  setFilters: (filters: { nameOrDescription: string; founded: string }) => void;
+  filters: Filters;
+  setFilters: (filters: Filters) => void;
 };
 
 const FilterContext = createContext<FilterContextType | undefined>(undefined);
 
 export function FilterProvider({ children }: { children: ReactNode }) {
-  const [filters, setFilters] = useState({
-    nameOrDescription: "",
-    founded: "",
-  });
-
+  const [filters, setFilters] = useState<Filters>({ searchTerm: "" });
   return (
     <FilterContext.Provider value={{ filters, setFilters }}>
       {children}
