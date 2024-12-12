@@ -5,12 +5,10 @@ interface InputFieldProps {
   label: string;
   type: string;
   name: string;
-  value: string | null;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: string;
 }
 
-const InputField: React.FC<InputFieldProps> = ({ label, type, name, value, onChange, error }) => {
+const InputField: React.FC<InputFieldProps> = ({ label, type, name, error, ...props }) => {
   const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
 
   const togglePasswordVisibility = () => {
@@ -22,10 +20,9 @@ const InputField: React.FC<InputFieldProps> = ({ label, type, name, value, onCha
       <label className="block text-gray-700 text-sm font-bold mb-2">{label}</label>
       <div className="relative">
         <input
+          {...props}
           type={type === "password" && isPasswordVisible ? "text" : type}
           name={name}
-          value={value ?? ""}
-          onChange={onChange}
           placeholder={label}
           className={`w-full p-2 border rounded-md focus:outline-none pr-10 ${
             error ? "border-red-500" : "border-gray-300"

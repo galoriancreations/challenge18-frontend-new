@@ -1,97 +1,62 @@
 "use client";
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import InputField from "../components/userInputFields";
+import { z } from "zod";
+import React from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import InputField from "../components/userInputFields";
+import { useForm, SubmitHandler } from "react-hook-form";
 
-interface RegistrationFormInputs {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
+// interface RegistrationFormInputs {
+//   email: string;
+//   username: string;
+//   password: string;
+//   confirmPassword: string;
+// }
+
+// 🔥 Zod schema for form validation
+const schema = z
+  .object({
+    username: z.string().nonempty("Username is required").min(3, "Username must be at least 3 characters long"),
+    email: z.string().email("Invalid email format").nonempty("Email is required"),
+    password: z
+      .string()
+      .min(6, "Password must be at least 6 characters long")
+      .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+      .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+      .regex(/[0-9]/, "Password must contain at least one number")
+      .regex(/[^A-Za-z0-9]/, "Password must contain at least one special character"),
+    confirmPassword: z.string().nonempty("Confirm password is required"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords must match",
+    path: ["confirmPassword"],
+  }); //check out refine in zod
+
+type RegistrationFormInputs = z.infer<typeof schema>;
 
 const SignUpPage: React.FC = () => {
   const router = useRouter();
-  const [formData, setFormData] = useState<RegistrationFormInputs>({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+
+  // 🔥 Use React Hook Form with Zod resolver
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<RegistrationFormInputs>({
+    resolver: zodResolver(schema),
   });
 
-  const [formErrors, setFormErrors] = useState<Partial<RegistrationFormInputs>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const validateForm = () => {
-    const errors: Partial<RegistrationFormInputs> = {};
-    let isValid = true;
-
-    if (!formData.username.trim()) {
-      errors.username = "Username required.";
-      isValid = false;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!formData.email.trim()) {
-      errors.email = "Email required.";
-      isValid = false;
-    } else if (!emailRegex.test(formData.email)) {
-      errors.email = "Invalid email format.";
-      isValid = false;
-    }
-
-    if (!formData.password.trim()) {
-      errors.password = "Password required.";
-      isValid = false;
-    } else if (formData.password.length < 6) {
-      errors.password = "Password must be at least 6 characters.";
-      isValid = false;
-    }
-
-    if (!formData.confirmPassword.trim()) {
-      errors.confirmPassword = "Please confirm your password.";
-      isValid = false;
-    } else if (formData.password !== formData.confirmPassword) {
-      errors.confirmPassword = "Passwords do not match.";
-      isValid = false;
-    }
-
-    setFormErrors(errors);
-    return isValid;
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!validateForm()) return;
-
-    setIsSubmitting(true);
-    setSuccessMessage(null);
-    setErrorMessage(null);
-
+  // 🔥 Form submit logic
+  const onSubmit: SubmitHandler<RegistrationFormInputs> = async (formData) => {
     try {
       const { data } = await axios.post("/api/signup", formData);
-      setSuccessMessage(data.message || "Account created successfully!");
-      setTimeout(() => router.push("/login"), 2000); // Wait 2 seconds before redirecting
+      alert(data.message || "Account created successfully!");
+      setTimeout(() => router.push("/login"), 2000);
+      console.log("success");
     } catch (error: any) {
-      console.log("signup error", error);
-      const userFriendlyErrorMessage = error.message.includes("Error:")
-        ? "An error occurred. Please try again later."
-        : error.message;
-      setErrorMessage(userFriendlyErrorMessage || "Something went wrong. Please try again.");
-    } finally {
-      setIsSubmitting(false);
+      console.error("Signup error", error);
+      alert("Something went wrong. Please try again.");
     }
   };
 
@@ -99,28 +64,23 @@ const SignUpPage: React.FC = () => {
     { label: "Username", type: "text", name: "username" },
     { label: "Email", type: "email", name: "email" },
     { label: "Password", type: "password", name: "password" },
-    { label: "Confirm Password", type: "password", name: "confirmPassword" },
+    { label: "ConfirmPassword", type: "password", name: "confirmPassword" },
   ];
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-slate-500">
-      <form className="bg-white p-6 rounded-md shadow-md w-96" onSubmit={handleSubmit}>
+      <form className="bg-white p-6 rounded-md shadow-md w-96" onSubmit={handleSubmit(onSubmit)}>
         <h1 className="text-center text-2xl font-bold mb-4">Sign Up</h1>
-
         {inputFields.map(({ label, type, name }) => (
-          <InputField
-            key={name}
-            label={label}
-            type={type}
-            name={name}
-            value={formData[name as keyof RegistrationFormInputs]}
-            onChange={handleChange}
-            error={formErrors[name as keyof RegistrationFormInputs]}
-          />
+          <div key={name}>
+            <InputField
+              {...register(name as keyof RegistrationFormInputs)}
+              label={label}
+              type={type}
+              error={errors[name as keyof RegistrationFormInputs]?.message}
+            />
+          </div>
         ))}
-
-        {successMessage && <div className="text-green-500 mb-4">{successMessage}</div>}
-        {errorMessage && <div className="text-red-500 mb-4">{errorMessage}</div>}
 
         <button
           type="submit"
