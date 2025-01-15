@@ -31,7 +31,7 @@ const schema = z
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords must match",
     path: ["confirmPassword"],
-  }); //check out refine in zod
+  });
 
 type RegistrationFormInputs = z.infer<typeof schema>;
 
