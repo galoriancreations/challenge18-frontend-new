@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { signupSchema } from "@/app/signup/signup-validation";
 import Link from "next/link";
+import { PasswordInput } from "./ui/passwordInput";
 
 type SignupFormData = z.infer<typeof signupSchema>;
 
@@ -58,12 +59,12 @@ export function SignupForm() {
           </div>
           <div>
             <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" {...register("password")} />
+            <PasswordInput id="password" {...register("password")} />
             {errors.password && <p className="text-destructive">{errors.password.message}</p>}
           </div>
           <div>
             <Label htmlFor="confirmPassword">Confirm Password</Label>
-            <Input id="confirmPassword" type="password" {...register("confirmPassword")} />
+            <PasswordInput id="confirmPassword" {...register("confirmPassword")} />
             {errors.confirmPassword && <p className="text-destructive">{errors.confirmPassword.message}</p>}
           </div>
           {apiError && <p className="text-destructive">{apiError}</p>}
