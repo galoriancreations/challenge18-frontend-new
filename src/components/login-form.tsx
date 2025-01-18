@@ -10,7 +10,7 @@ import { loginAction } from "@/app/login/action";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { loginSchema } from "@/app/login/auth-validation";
+import { loginSchema } from "@/app/login/login-validation";
 
 export function LoginForm() {
   const [formState, formAction] = useActionState(loginAction, {

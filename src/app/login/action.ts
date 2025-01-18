@@ -1,6 +1,6 @@
 "use server";
 import "server-only";
-import { loginSchema } from "./auth-validation";
+import { loginSchema } from "./login-validation";
 
 type FormState = {
   success: boolean;
@@ -17,11 +17,12 @@ export async function loginAction(prevState: FormState, payload: FormData): Prom
       errors: { error: ["Invalid Form Data"] },
     };
   }
-  // Here, we use `Object.fromEntries(payload)` to convert the `FormData` object into a plain object. This allows us to work with the data in a format that the zod schema understands.
 
+  // Convert FormData to a plain object
   const formData = Object.fromEntries(payload);
   console.log("form data", formData);
 
+  // Validate form data using the schema
   const parsed = loginSchema.safeParse(formData);
 
   if (!parsed.success) {
@@ -40,15 +41,34 @@ export async function loginAction(prevState: FormState, payload: FormData): Prom
     };
   }
 
-  if (parsed.data.email === "test@example.com") {
+  // ✅ API call to the `/api/login` route
+  try {
+    const response = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(parsed.data),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return {
+        success: false,
+        errors: { error: [data.error] },
+        fields: parsed.data,
+      };
+    }
+
+    console.log("Login successful:", data);
+    return {
+      success: true,
+    };
+  } catch (error) {
+    console.error("API call error:", error);
     return {
       success: false,
-      errors: { email: ["email already taken"] },
+      errors: { error: ["Something went wrong"] },
       fields: parsed.data,
     };
   }
-  console.log("parsed data", parsed.data);
-  return {
-    success: true,
-  };
 }

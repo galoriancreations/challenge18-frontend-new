@@ -1,11 +1,6 @@
 import { z } from "zod";
 
-export const loginSchema = z.object({
-  email: z.string().trim().min(2, "2 or more char").email(),
-  password: z.string().trim().min(8, "min char is 8"),
-});
-
-const signupSchema = z
+export const signupSchema = z
   .object({
     username: z.string().nonempty("Username is required").min(3, "Username must be at least 3 characters long"),
     email: z.string().email("Invalid email format").nonempty("Email is required"),
