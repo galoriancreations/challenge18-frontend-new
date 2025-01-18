@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { loginSchema } from "@/app/login/login-validation";
+import { PasswordInput } from "./ui/passwordInput";
 
 export function LoginForm() {
   const [formState, formAction] = useActionState(loginAction, {
@@ -81,13 +82,7 @@ export function LoginForm() {
                 Forgot your password?
               </Link>
             </div>
-            <Input
-              id="password"
-              type="password"
-              required
-              defaultValue={formState.fields?.password}
-              {...register("password")}
-            />
+            <PasswordInput id="password" required defaultValue={formState.fields?.password} {...register("password")} />
             {formState?.errors?.password && <p className="text-destructive">{formState?.errors?.password}</p>}
             {rhfErrors.password?.message && <p className="text-destructive">{rhfErrors.password?.message}</p>}
           </div>
