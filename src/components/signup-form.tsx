@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { signupSchema } from "@/app/signup/signup-validation";
 import Link from "next/link";
-import { PasswordInput } from "./ui/passwordInput";
+import { PasswordInput } from "@/components/ui/passwordInput";
 
 type SignupFormData = z.infer<typeof signupSchema>;
 
@@ -28,13 +28,16 @@ export function SignupForm() {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const onSubmit = async (data: SignupFormData) => {
+    console.log(data);
     setApiError(null);
     setSuccessMessage(null);
 
     try {
       const response = await axios.post("/api/signup", data);
+      console.log("sent request");
       setSuccessMessage("Signup successful! You can now log in.");
     } catch (error: any) {
+      console.log(error);
       setApiError(error.response?.data?.error || "Something went wrong. Please try again.");
     }
   };
