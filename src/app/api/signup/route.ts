@@ -6,7 +6,7 @@ import { connectToDatabase } from "@/lib/mongodb";
 export async function POST(req: Request) {
   await connectToDatabase();
 
-  const { email, password } = await req.json();
+  const { username, email, password } = await req.json();
 
   // Check if user already exists
   const existingUser = await User.findOne({ email });
@@ -18,7 +18,7 @@ export async function POST(req: Request) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   // Create new user
-  const newUser = new User({ email, password: hashedPassword });
+  const newUser = new User({ username, email, password: hashedPassword });
   await newUser.save();
 
   return NextResponse.json({ message: "Signup successful" }, { status: 201 });

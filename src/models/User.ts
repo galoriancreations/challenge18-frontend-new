@@ -2,6 +2,11 @@ import mongoose, { Schema, model, models } from "mongoose";
 
 // Define the User schema
 const UserSchema = new Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   email: {
     type: String,
     required: true,
