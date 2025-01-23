@@ -30,10 +30,10 @@ const Sidebar = () => {
         {links.map((link) => (
           <Link
             key={link.href}
-            href={link.href}
+            href={`/${link.href}`}
             className={classnames("flex items-center gap-4 px-6 py-4 hover:bg-slate-600  ", {
-              "text-accent-pink ": link.href === currentPath,
-              "hover:text-accent-pink": link.href !== currentPath,
+              "text-accent-pink ": `/${link.href}` === currentPath,
+              "hover:text-accent-pink": `/${link.href}` !== currentPath,
             })}
           >
             <span>{link.icon}</span>

@@ -5,7 +5,7 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/ting-g
 // Create a connection to MongoDB
 const connectToDatabase = async () => {
   if (mongoose.connection.readyState >= 1) return;
-
+  console.log(MONGODB_URI);
   try {
     console.log("Attempting to connect to MongoDB...");
     await mongoose.connect(MONGODB_URI);
